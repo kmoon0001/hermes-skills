@@ -1,0 +1,175 @@
+{
+  "jobs": [
+    {
+      "id": "a1ad2675ff00",
+      "name": "AI Agent Dev Weekly Digest",
+      "prompt": "You are a research curator. Produce a concise digest of the latest news relevant to AI agent development, then send it via email AND output it here.\n\n## Phase 1: Research\n\nSearch across ALL of these domains, and expand beyond this list if you find other relevant topics:\n\n### 1. Microsoft Copilot Studio & Power Platform\n- New Copilot Studio features, updates, releases (check Microsoft Learn What's New, Tech Community blogs)\n- Power Platform CLI (pac) updates\n- Agent Evaluation, YAML authoring, Healthcare Agent Service\n- New templates, connectors, capabilities for building agents\n\n### 2. Hermes Agent (by Nous Research)\n- New releases, features, bug fixes (check GitHub releases: NousResearch/hermes-agent)\n- New skills, plugins, config options\n- Docs: hermes-agent.nousresearch.com/docs\n\n### 3. AI Agent Development Tools\n- New tools for building/testing Copilot Studio agents\n- MCP (Model Context Protocol) news and new servers/tools\n- New agent frameworks, evaluation tools\n- Online platforms for agent development\n\n### 4. Free AI Access & Models\n- OpenRouter new models and free-tier changes\n- Codex CLI updates\n- New free/open-source LLMs for local inference\n- New AI coding assistants\n\n### 5. Google News / Industry Feed\n- Search Google News for: \"Copilot Studio\", \"Power Platform AI\", \"AI agents Microsoft\", \"Hermes agent\", \"Nous Research\", \"OpenRouter\", \"Codex CLI\"\n- Pick the 3-5 most interesting/actionable stories\n\n## Phase 2: Compile Digest\n\nFormat:\n\n```\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\nAI Agent Dev Weekly Digest \u2014 [Date]\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n\n## Microsoft Copilot Studio & Power Platform\n[3-5 bullet points with URLs]\n\n## Hermes Agent\n[any updates, or \"No notable changes this week\"]\n\n## AI Agent Development Tools\n[2-4 items with URLs]\n\n## Free AI / Models / Access\n[2-3 items with URLs]\n\n## Google News Picks\n[3-5 top stories from Google News scan]\n\n## Worth A Look\n[1-3 bonus items]\n\n\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n```\n\n## Phase 3: Send via Email\n\nPipe the compiled digest through the send script:\n\n```bash\ncat << 'DIGEST_EOF' | python /c/Users/kevin/AppData/Local/hermes/profiles/coding-profile/scripts/send_digest.py\n[full digest content here]\nDIGEST_EOF\n```\n\nThen also output the digest in your final response so it appears here in the conversation too.\n\n## Rules\n- Search broadly. Use web_search and web_extract actively.\n- Include direct URLs to every source.\n- Do NOT fabricate releases or dates. If nothing new, say so.\n- Keep it concise and actionable.",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "base_url": null,
+      "script": null,
+      "no_agent": false,
+      "context_from": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 9 * * 1,4",
+        "display": "0 9 * * 1,4"
+      },
+      "schedule_display": "0 9 * * 1,4",
+      "repeat": {
+        "times": null,
+        "completed": 2
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-06-09T11:38:51.867164-07:00",
+      "next_run_at": "2026-07-02T09:00:00-07:00",
+      "last_run_at": "2026-06-29T09:01:30.226790-07:00",
+      "last_status": "error",
+      "last_error": "RuntimeError: Connection error.",
+      "last_delivery_error": null,
+      "deliver": "local",
+      "origin": null,
+      "enabled_toolsets": null,
+      "workdir": null,
+      "profile": null,
+      "fire_claim": null
+    },
+    {
+      "id": "67507e26b76e",
+      "name": "Kiro \u2192 Hermes Skill Sync",
+      "prompt": "",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "base_url": null,
+      "script": "kiro_sync.py",
+      "no_agent": true,
+      "context_from": null,
+      "schedule": {
+        "kind": "interval",
+        "minutes": 60,
+        "display": "every 60m"
+      },
+      "schedule_display": "every 60m",
+      "repeat": {
+        "times": null,
+        "completed": 89
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-06-09T15:00:23.920878-07:00",
+      "next_run_at": "2026-07-01T08:37:59.439668-07:00",
+      "last_run_at": "2026-07-01T07:37:59.439668-07:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "local",
+      "origin": null,
+      "enabled_toolsets": null,
+      "workdir": null,
+      "profile": null,
+      "fire_claim": null
+    },
+    {
+      "id": "a9bc2970edec",
+      "name": "sequoia-park-weekly-research",
+      "prompt": "Research Sequoia National Park in California for the user who wants to book a lodge or camping spot. Do a thorough weekly sweep covering campground/lodge availability, deals/discounts, weather, park alerts, gear prep, and hidden gems.\n\nThen format a SHORT, actionable email report and send it to BOTH recipients.\n\nEMAIL FORMATTING RULES \u2014 keep it tight:\n- Start with a 2-3 line TL;DR at the top (the absolute must-know items)\n- Use BOLD headers for each section\n- Only include actionable info \u2014 skip generic advice, fluff, and stuff that hasn't changed\n- If a campground has OPEN SPOTS for the next 2 weekends, put that FIRST\n- If nothing changed from last week, say \"No changes this week\" and skip the section\n- Keep total email under 400 words\n- End with a \"BOOK NOW\" link to recreation.gov Sequoia page\n\nRECIPIENTS \u2014 send to BOTH:\n- kevinmoon7@gmail.com\n- lee85lisa@gmail.com\n\nUse Python smtplib to send. Here's the script to execute after compiling the report:\n\n```python\nimport smtplib\nfrom email.mime.text import MIMEText\nfrom email.mime.multipart import MIMEMultipart\nimport os\n\nsender = \"kevinmoon7@gmail.com\"\npassword = \"jtbhkxzpunrjiyar\"\nrecipients = [\"kevinmoon7@gmail.com\", \"lee85lisa@gmail.com\"]\n\nmsg = MIMEMultipart()\nmsg[\"From\"] = sender\nmsg[\"To\"] = \", \".join(recipients)\nmsg[\"Subject\"] = \"Sequoia Park Weekly - [DATE]\"\nmsg.attach(MIMEText(report_text, \"plain\"))\n\nserver = smtplib.SMTP(\"smtp.gmail.com\", 587)\nserver.ehlo()\nserver.starttls()\nserver.ehlo()\nserver.login(sender, password)\nserver.sendmail(sender, recipients, msg.as_string())\nserver.quit()\nprint(\"Email sent to both recipients!\")\n```\n\nIMPORTANT: actually execute the Python email send at the end. Do not just print the report \u2014 send it.",
+      "skills": [
+        "hermes-agent"
+      ],
+      "skill": "hermes-agent",
+      "model": null,
+      "provider": null,
+      "provider_snapshot": "xiaomi",
+      "model_snapshot": "mimo-v2.5",
+      "base_url": null,
+      "script": null,
+      "no_agent": false,
+      "context_from": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 13 * * 5",
+        "display": "0 13 * * 5"
+      },
+      "schedule_display": "0 13 * * 5",
+      "repeat": {
+        "times": null,
+        "completed": 1
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-06-26T11:21:24.513164-07:00",
+      "next_run_at": "2026-07-03T13:00:00-07:00",
+      "last_run_at": "2026-06-27T14:38:23.769690-07:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "origin",
+      "origin": null,
+      "enabled_toolsets": null,
+      "workdir": null,
+      "fire_claim": null
+    },
+    {
+      "id": "e6cd477d73a1",
+      "name": "Weekly Hermes Persistent Context Cleanup",
+      "prompt": "Weekly maintenance task: clean and compact Kevin's Hermes persistent context so it is lighter, easier to use, and more effective without deleting useful accumulated capability.\n\nUse the loaded skills, especially persistent-context-cleanup, memory-to-skill-categorization, hermes-agent-skill-authoring, and hermes-agent.\n\nOperating principles:\n- Follow Andrej Karpathy-style AGENTS.md principles: compact, direct, durable, plain instructions; no sediment; preserve useful working behavior.\n- Active profile only: this session is for the coding-profile. Do not edit another Hermes profile's skills/plugins/cron/memories unless Kevin explicitly approved it in a current source file/report.\n- Do not expose secrets. Do not include API keys or credential values in reports.\n- Never delete useful guidance. Compact, de-duplicate, and move details to the right skill instead.\n- Procedures, Copilot Studio details, license-verification workflows, email/Power Automate setup, and project-specific pitfalls belong in skills. Memory should mostly be user preferences, stable environment facts, and pointer lines.\n\nRun mode / approval gate:\n- Count existing reports named context-cleanup-*.md under the active profile maintenance/reports directory.\n- If fewer than 3 previous reports exist, this is an approval-only early run: inspect and write a report with proposed edits, but DO NOT remove memory entries, delete files, or rewrite persistent files. You may create/update this report only.\n- After 3 previous reports exist, you may apply low-risk compaction with backups first. Still only propose, do not apply, any risky change: file deletion, memory removal where value is uncertain, credentials/config changes, cross-profile edits, or large rewrites.\n\nRequired workflow:\n1. Discover in-scope persistent context sources: active profile skills, memory/user-profile backing files if discoverable, AGENTS.md/HERMES.md/CLAUDE.md/skills.md files in relevant active-profile or current workdir scope, and any maintenance files from this workflow.\n2. Create a timestamped backup folder under the active profile before editing any file.\n3. Audit for overlap, duplication, stale task progress, bloated prose, and content that should move from memory into skills.\n4. For early runs: produce proposed patches and memory operations only. For later runs: apply safe targeted patches using patch/write_file/skill_manage/memory as appropriate.\n5. Update existing skills rather than creating duplicates. If a new recurring workflow has no home, create a focused skill with valid frontmatter.\n6. Verify changed files by re-reading them; validate edited skills have frontmatter with name + description and non-empty body; confirm memory pointers reference real skills.\n7. Save a concise markdown report to the active profile maintenance/reports/context-cleanup-YYYYMMDD.md. Include: files inspected, changes applied, proposed changes needing Kevin approval, memory replace/remove suggestions, skills touched, backups, and verification results.\n8. Final response should summarize the report path, whether this was approval-only or auto-apply, and exactly what Kevin should approve next if anything.\n\nBe conservative, useful, and token-focused.",
+      "skills": [
+        "hermes-agent",
+        "memory-to-skill-categorization",
+        "hermes-agent-skill-authoring",
+        "persistent-context-cleanup"
+      ],
+      "skill": "hermes-agent",
+      "model": null,
+      "provider": null,
+      "provider_snapshot": "openai-codex",
+      "model_snapshot": "gpt-5.5",
+      "base_url": null,
+      "script": null,
+      "no_agent": false,
+      "context_from": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 8 * * 1",
+        "display": "0 8 * * 1"
+      },
+      "schedule_display": "0 8 * * 1",
+      "repeat": {
+        "times": null,
+        "completed": 0
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-07-01T03:15:15.271616-07:00",
+      "next_run_at": "2026-07-06T08:00:00-07:00",
+      "last_run_at": null,
+      "last_status": null,
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "local",
+      "origin": null,
+      "enabled_toolsets": [
+        "file",
+        "terminal",
+        "skills",
+        "memory",
+        "session_search"
+      ],
+      "workdir": null
+    }
+  ],
+  "updated_at": "2026-07-01T07:37:59.440668-07:00"
+}
