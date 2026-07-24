@@ -1,0 +1,41 @@
+# Known-good Conversational Boosting topic YAML for TDA (Therapy Documentation Audit Agent).
+# Replaces the default CB refusal with a TDA-specific helpful redirect.
+# Same pitfalls as the generic CB template — see references/cdp-code-editor-workflow.md.
+#
+# To use: TDA > Topics > System > Conversational boosting > More > Open code editor >
+# Ctrl+A > paste this entire file > Save > Publish
+
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnUnknownIntent
+  id: main
+  priority: -1
+  actions:
+    - kind: SearchAndSummarizeContent
+      id: search-content
+      latencyMessageSettings:
+        allowLatencyMessage: false
+      variable: Topic.Answer
+      userInput: =System.Activity.Text
+      additionalInstructions: |-
+        - If the user provides therapy documentation text, perform a compliance audit with Medicare Defensibility Score (0-100), findings, missing elements, and recommendations. End with the advisory disclaimer.
+        - If the user asks a general compliance/regulatory question without a document, answer directly from knowledge sources with citations.
+        - If the user asks to audit a document but none is provided in this conversation, ask once for the document or record_id.
+        - Maintain conversation continuity. Reference information from earlier turns when relevant. Do not re-ask for information already provided.
+      applyModelKnowledgeSetting: true
+    - kind: ConditionGroup
+      id: has-answer-conditions
+      conditions:
+        - id: has-answer
+          condition: =!IsBlank(Topic.Answer)
+          actions:
+            - kind: EndDialog
+              id: end-topic
+              clearTopicQueue: true
+      elseActions:
+        - kind: SendActivity
+          id: sendActivity_fallback
+          activity: I can help with therapy documentation audits including compliance reviews denial risk analysis progress note checks evaluation audits and discharge summary reviews. Could you provide more detail about what you would like me to audit?
+        - kind: EndDialog
+          id: end-topic-fallback
+          clearTopicQueue: true

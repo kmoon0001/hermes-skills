@@ -1,0 +1,4 @@
+interface:
+  display_name: "Copilot Studio Agent Migration"
+  short_description: "Migrate agents with solution ALM"
+  default_prompt: "Use $copilot-studio-agent-solution-migration to migrate Copilot Studio agents between Power Platform environments and verify synchronization."

@@ -1,0 +1,40 @@
+# SLP_Specialist Conversational Boosting topic YAML (original, known-good)
+# Achieves 95% Conv + 95% SR. DO NOT modify additionalInstructions.
+# Paste into: Topics > System > Conversational boosting > More > Open code editor
+#
+# The 600-char limit and "Always cite" directive are CORRECT per Microsoft Learn.
+# Modifying them caused SR regression from 92% to 35% (see references/cb-topic-citation-fix.md).
+
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnUnknownIntent
+  id: main
+  priority: -1
+  actions:
+    - kind: SearchAndSummarizeContent
+      id: search-content
+      latencyMessageSettings:
+        allowLatencyMessage: false
+      variable: Topic.Answer
+      userInput: =System.Activity.Text
+      additionalInstructions: |-
+        Keep response under 600 characters. Give the most relevant 2-3 points only.
+        - Always cite knowledge sources using [Source Name] format in every response
+      webBrowsing: false
+      applyModelKnowledgeSetting: true
+    - kind: ConditionGroup
+      id: has-answer-conditions
+      conditions:
+        - id: has-answer
+          condition: =!IsBlank(Topic.Answer)
+          actions:
+            - kind: EndDialog
+              id: end-topic
+              clearTopicQueue: true
+      elseActions:
+        - kind: SendActivity
+          id: sendActivity_fallback
+          activity: I don't have specific information on that topic. I specialize in SLP documentation compliance, Medicare requirements, and clinical audit. Could you rephrase your question or ask about a specific SLP documentation type (evaluation, daily note, discharge summary, recertification)?
+        - kind: EndDialog
+          id: end-topic-fallback
+          clearTopicQueue: true

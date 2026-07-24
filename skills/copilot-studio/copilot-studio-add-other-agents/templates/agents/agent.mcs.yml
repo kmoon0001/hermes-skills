@@ -1,0 +1,19 @@
+kind: AgentDialog
+beginDialog:
+  kind: OnToolSelected
+  id: main
+  description: Describe what this agent handles and when the orchestrator should route here.
+settings:
+  instructions: |
+    You are a specialist agent. Describe your role, behavior, and boundaries here.
+inputs:
+  - kind: AutomaticTaskInput
+    propertyName: UserQuery
+    description: The user's question or request
+inputType:
+  properties:
+    UserQuery:
+      displayName: User Query
+      description: The user's question or request
+      type: String
+outputType: {}

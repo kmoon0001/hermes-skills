@@ -1,0 +1,18 @@
+kind: TaskDialog
+modelDisplayName: External Agent Caller
+modelDescription: Call an external connected agent
+inputs:
+  - kind: AutomaticTaskInput
+    propertyName: inputParam
+    description: Input to send to the connected agent
+action:
+  kind: InvokeConnectedAgentTaskAction
+  inputType:
+    properties:
+      inputParam:
+        displayName: inputParam
+        isRequired: true
+        type: String
+  botSchemaName: your_external_agent_schema_name
+  historyType:
+    kind: ConversationHistory

@@ -1,0 +1,8 @@
+# Conversation Starter — Type 19 botcomponent
+# POST to /api/data/v9.2/botcomponents
+# Replace: {DisplayText}, {SchemaName}
+# Component type 19 = conversation starter shown in Copilot Studio test pane
+# Name convention: "Fresh-SR | {question}" or "Fresh-CONV | {scenario}"
+# 5-10 starters recommended per agent
+kind: ConversationStarter
+displayText: {DisplayText}

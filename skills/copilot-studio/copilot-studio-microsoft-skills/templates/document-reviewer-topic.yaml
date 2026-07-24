@@ -1,0 +1,95 @@
+# Document Reviewer → Copilot Studio Topic (Worked Example)
+
+This converts the Document Reviewer agent (89-agents repo) into a full Copilot Studio topic. The same pattern works for any of the 89 agents.
+
+## Instructions (paste into Settings → General → Instructions)
+
+From `C:\Users\kevin\awesome-copilot-studio-agents\agents\project-management\document-reviewer.md`, the full block under `## Instructions`.
+
+## Topic YAML
+
+```yaml
+kind: AdaptiveDialog
+modelDescription: "Reviews business and technical documents for structural quality, clarity, completeness, and internal consistency across 6 criteria. Produces a formal review record with an issues log, severity ratings, and actionable recommendations."
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent:
+    displayName: Document Reviewer
+    triggerQueries:
+      - review this document
+      - check document quality
+      - audit this document
+      - review document completeness
+      - check for placeholder content
+      - document review
+      - review this proposal
+      - check for TBC placeholders
+
+  actions:
+    - kind: Question
+      id: question_doc_input
+      interruptionPolicy:
+        allowInterruption: true
+      variable: Topic.DocumentToReview
+      prompt: Please paste the document you want reviewed, or upload the file.
+      entity:
+        kind: StringPrebuiltEntity
+
+    - kind: ConditionGroup
+      id: conditionGroup_has_input
+      conditions:
+        - id: condition_input_provided
+          condition: '=!IsBlank(Topic.DocumentToReview)'
+          actions:
+            - kind: SearchAndSummarizeContent
+              id: search_document_review
+              variable: Topic.ReviewResult
+              userInput: '=Concatenate("Review this document for structural quality, clarity, completeness, and internal consistency across all 6 criteria. Produce a formal review record with issues log, severity ratings, and recommendations:\n\n", Topic.DocumentToReview)'
+              additionalInstructions: |-
+                ## REVIEW CRITERIA
+                ### Criterion 1: Purpose and Scope — clearly stated purpose? Scope defined?
+                ### Criterion 2: Structure and Completeness — all expected sections present?
+                ### Criterion 3: Internal Consistency — abbreviations defined? cross-references correct? [TBC] placeholders flagged?
+                ### Criterion 4: Clarity and Language — technical terms defined? language professional?
+                ### Criterion 5: References and Attribution — external docs referenced with title/revision?
+                ### Criterion 6: Action and Approvals — signature block present? signatories identified?
+                ## OUTPUT FORMAT
+                Produce a formal review record with: issues log (Critical/Major/Minor/Observation), review status (Approved/Approved with Comments/Rejected), and complete list of all [TBC] placeholders.
+              applyModelKnowledgeSetting: false
+              responseCaptureType: FullResponse
+
+            - kind: SendActivity
+              id: sendActivity_review
+              activity: "{Topic.ReviewResult}"
+
+      elseActions:
+        - kind: SendActivity
+          id: sendActivity_no_input
+          activity: I need a document to review. Please paste the text or upload a file.
+
+    - kind: EndDialog
+      id: endDialog_main
+      clearTopicQueue: true
+```
+
+## Key Remix Decisions
+
+| Original M365 Agent | Remixed As |
+|---------------------|-----------|
+| "Review this document..." conversation starter | `triggerQueries` — 9 phrases |
+| ## Instructions (entire block) | `additionalInstructions` on SearchAndSummarizeContent |
+| 6 review criteria | Kept as-is in additionalInstructions |
+| Output format | The SearchAndSummarizeContent generates this naturally |
+| Banned vocabulary list | Added to additionalInstructions or agent-level instructions |
+| "Do not verify technical correctness" | Added to additionalInstructions as guardrail |
+
+## Remix Pattern for Any M365 Agent
+
+1. **Trigger phrases**: Extract 5-10 from the Conversation Starters section
+2. **Instructions**: The full instruction block goes into `additionalInstructions` on the search node
+3. **Input**: Add a Question node with StringPrebuiltEntity (accepts text or file)
+4. **Output**: SendActivity with the result variable
+5. **Guardrails**: The "WHAT YOU DO NOT DO" section becomes conditions or else-branches
+
+The 89 agents each have ~6,200 chars of instructions — well within Copilot Studio's limits.

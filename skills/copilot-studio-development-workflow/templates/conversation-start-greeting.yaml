@@ -1,0 +1,43 @@
+# Conversation Start Greeting Template
+# 
+# Copy this template into your agent's Conversation Start topic code editor.
+# Adapt the `text`, `speak`, and `suggestedActions` values per agent.
+#
+# The blank lines between suggestedAction Value: items are significant in YAML.
+# 6-8 suggested actions is the recommended range.
+#
+# Usage: 
+#   1. Find Conversation Start component ID via Dataverse
+#   2. Navigate to /adaptive/{componentId}
+#   3. More → Open code editor
+#   4. Replace YAML with this content (adapted)
+#   5. Save + publish
+
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnConversationStart
+  id: main
+  actions:
+    - kind: SendActivity
+      id: sendGreeting
+      activity:
+        text:
+          - {AGENT_NAME} — I audit {DISCIPLINE} documentation for Medicare compliance, {REGULATORY_BODIES} guidelines, and CMS Chapter 15 requirements. Select an option below or describe what you need.
+        speak:
+          - Welcome to the {AGENT_NAME}. How can I help you with documentation compliance today?
+        suggestedActions:
+          - Value: Audit my {DISCIPLINE} evaluation for Medicare and {REGULATORY_BODIES} compliance
+
+          - Value: Check my {DISCIPLINE} daily note for missing documentation elements
+
+          - Value: Review my {DISCIPLINE} progress note for skilled service justification
+
+          - Value: Audit my {DISCIPLINE} recertification for continued skilled need
+
+          - Value: Review my {DISCIPLINE} discharge summary for Medicare compliance
+
+          - Value: Check for denial risk indicators in my {DISCIPLINE} documentation
+
+          - Value: What are the key Medicare documentation requirements for {DISCIPLINE}?
+
+          - Value: How does your audit scoring and risk classification work?

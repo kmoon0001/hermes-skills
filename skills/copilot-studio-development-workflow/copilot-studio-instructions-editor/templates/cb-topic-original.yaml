@@ -1,0 +1,33 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnUnknownIntent
+  id: main
+  priority: -1
+  actions:
+    - kind: SearchAndSummarizeContent
+      id: search-content
+      latencyMessageSettings:
+        allowLatencyMessage: false
+      variable: Topic.Answer
+      userInput: =System.Activity.Text
+      additionalInstructions: |-
+        Keep response under 600 characters. Give the most relevant 2-3 points only.
+        - Always cite knowledge sources using [Source Name] format in every response
+      webBrowsing: false
+      applyModelKnowledgeSetting: true
+    - kind: ConditionGroup
+      id: has-answer-conditions
+      conditions:
+        - id: has-answer
+          condition: =!IsBlank(Topic.Answer)
+          actions:
+            - kind: EndDialog
+              id: end-topic
+              clearTopicQueue: true
+      elseActions:
+        - kind: SendActivity
+          id: sendActivity_fallback
+          activity: I don't have specific information on that topic.
+        - kind: EndDialog
+          id: end-topic-fallback
+          clearTopicQueue: true

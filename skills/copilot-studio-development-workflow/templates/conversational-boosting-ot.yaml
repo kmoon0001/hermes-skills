@@ -1,0 +1,37 @@
+# OT Specialist Conversational Boosting topic YAML
+# Paste into: Topics > System > Conversational boosting > More > Open code editor > Ctrl+A > Ctrl+V > Save > Publish
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnUnknownIntent
+  id: main
+  priority: -1
+  actions:
+    - kind: SearchAndSummarizeContent
+      id: search-content
+      latencyMessageSettings:
+        allowLatencyMessage: false
+      variable: Topic.Answer
+      userInput: =System.Activity.Text
+      additionalInstructions: |-
+        Answer the OT compliance or clinical documentation question. Focus on:
+        1. Most relevant information from CMS Ch. 15, AOTA, or 42 CFR
+        2. Practical guidance with regulatory citations
+        3. Keep response under 800 characters
+        If the question is unclear, ask for clarification.
+      applyModelKnowledgeSetting: true
+    - kind: ConditionGroup
+      id: has-answer-conditions
+      conditions:
+        - id: has-answer
+          condition: =!IsBlank(Topic.Answer)
+          actions:
+            - kind: EndDialog
+              id: end-topic
+              clearTopicQueue: true
+      elseActions:
+        - kind: SendActivity
+          id: fallback-message
+          activity: I can help with OT documentation compliance including evaluation audits daily note reviews progress note checks recertification analysis discharge summaries and denial risk assessment. Could you provide more detail about what you would like me to evaluate?
+        - kind: EndDialog
+          id: end-fallback
+          clearTopicQueue: true

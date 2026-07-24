@@ -1,0 +1,56 @@
+# Known-good Conversational Boosting topic YAML for Copilot Studio (OT agent).
+# Replaces the default CB refusal message ("I don't have specific information on that...")
+# with a helpful redirect that guides users back to supported capabilities.
+#
+# ⚠️ IMPORTANT: This template is agent-SPECIFIC (OT). For other agents (PT, SLP, TDA),
+# the ONLY field to change is the `activity:` line under elseActions. Preserve ALL other
+# fields from that agent's existing CB YAML — especially:
+#   - All `id:` values (search-content, has-answer-conditions, etc.)
+#   - The `additionalInstructions:` block (varies per agent)
+#   - The `priority:` value
+#   - The `variable:` and other SearchAndSummarizeContent settings
+#
+# PITFALLS (see references/cdp-code-editor-workflow.md):
+# - Use SearchAndSummarizeContent, NOT CreateGenerativeAnswers
+# - NO commas in the activity: string
+# - NO question marks or apostrophes/contractions
+# - NO line breaks in activity: — keep it on ONE line
+# - NO double quotes around activity: — Copilot Studio YAML parser rejects them
+#
+# To use: Topics > System > Conversational boosting > More > Open code editor >
+# Ctrl+A > paste this entire file > type space+Backspace to wake Save > Save > Publish
+
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnUnknownIntent
+  id: main
+  priority: -1
+  actions:
+    - kind: SearchAndSummarizeContent
+      id: search-content
+      latencyMessageSettings:
+        allowLatencyMessage: false
+      variable: Topic.Answer
+      userInput: =System.Activity.Text
+      additionalInstructions: |-
+        1. Provide the best available OT compliance answer using knowledge sources. Cite regulatory references when they naturally apply — do not force a citation where none exists.
+        2. When asked to audit without document text: describe the key Medicare compliance elements for that document type then ask for the content.
+        3. Keep responses under 800 characters. For broad questions, prioritize the top 3-4 most relevant requirements.
+        4. Never refuse to help. If knowledge sources are insufficient, provide general OT compliance guidance based on CMS Ch. 15 and 42 CFR frameworks.
+      applyModelKnowledgeSetting: true
+    - kind: ConditionGroup
+      id: has-answer-conditions
+      conditions:
+        - id: has-answer
+          condition: =!IsBlank(Topic.Answer)
+          actions:
+            - kind: EndDialog
+              id: end-topic
+              clearTopicQueue: true
+      elseActions:
+        - kind: SendActivity
+          id: fallback-message
+          activity: I can help with OT documentation compliance. Key Medicare requirements include skilled service justification per CMS Ch. 15 Section 220 functional outcomes with measurable progress and medical necessity documentation. Which document type would you like me to help with?
+        - kind: EndDialog
+          id: end-fallback
+          clearTopicQueue: true

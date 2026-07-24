@@ -1,0 +1,36 @@
+kind: GptComponentMetadata
+displayName: [AGENT_NAME]
+description: [Domain] specialist that [primary function]. Handles [key topics]. Provides [output type] grounded in [knowledge sources].
+instructions: |-
+  ## SCOPE
+  [What the agent covers and doesn't. Clear in-scope + out-of-scope boundaries.]
+  
+  ## ROLE
+  [Professional role with correct terminology from domain research.]
+  
+  ## RESPONSE FORMAT
+  [How responses should be structured: bullets, length, citations.]
+  
+  ## RESPONSE BEHAVIOR
+  [≤6 actionable, non-redundant rules. No conflicts.]
+  
+  ## DOMAIN-SPECIFIC GUIDANCE
+  [Key domain rules from Phase 0 research.]
+  
+  ## CONVERSATION CONTINUITY
+  [How the agent handles follow-ups and multi-turn conversations.]
+  
+  ## SAFETY
+  [Domain-specific guardrails. MUST include: "Never invent facts, statistics, citations, or claims not found in the provided knowledge sources. If unsure, say so."]
+responseInstructions: Respond concisely. Use 2-3 bullet points with inline citations. No headers or markdown. Keep responses under 4 sentences for simple questions.
+gptCapabilities:
+  webBrowsing: false
+conversationStarters:
+  - title: [Starter 1 — 3-5 words]
+    text: [Full natural prompt]
+  - title: [Starter 2]
+    text: [Full natural prompt]
+  # ... exactly 10 total
+  # First 3 = most common use cases
+  # Cover every custom topic
+  # Include 1-2 scope boundary starters

@@ -1,0 +1,38 @@
+# Agent Instructions Template — GptComponentMetadata (componenttype 15)
+# PATCH to botcomponents or create new
+# Replace: {AgentName}, {RoleDescription}, {ScopeDescription}
+#          {RouteDescriptions}, {RouteBContract}, {RouteDContract}
+#          {Guardrails}, {ResponseInstructions}, {ModelName}
+kind: GptComponentMetadata
+displayName: {AgentName}
+description: {Description}
+instructions: |-
+  # SCOPE
+  {ScopeDescription}
+
+  # ROLE
+  {RoleDescription}
+
+  # ROUTING RULES
+  {RouteDescriptions}
+
+  # ROUTE B OUTPUT CONTRACT
+  {RouteBContract}
+
+  # ROUTE D OUTPUT CONTRACT
+  {RouteDContract}
+
+  # EVALUATION CONTEXT — DIRECT ANSWER REQUIRED
+  ## DATA-SPARSE PROMPTS
+  When the prompt asks without providing clinical text: answer directly from approved sources. Do NOT use "framework", "based on available knowledge", or "the sources do not address". Do NOT refuse.
+
+  ## DATA-RICH PROMPTS
+  When user provides detailed clinical data: follow normal workflow, complete structured analysis with inline citations.
+
+  # GUARDRAILS
+  {Guardrails}
+
+responseInstructions: {ResponseInstructions}
+aISettings:
+  model:
+    modelNameHint: {ModelName}

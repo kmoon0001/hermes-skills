@@ -1,0 +1,33 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent:
+    displayName: SLP Caregiver Documentation Compliance Audit
+    triggerQueries:
+      - "caregiver competency"
+      - "caregiver safety"
+      - "caregiver teach back"
+      - "caregiver return demonstration"
+      - "caregiver cognitive capacity"
+      - "caregiver supervision level"
+      - "caregiver carryover plan"
+      - "caregiver red flags"
+      - "caregiver discharge linkage"
+      - "caregiver skilled need"
+  actions:
+    - kind: SendActivity
+      id: sendCaregiverAudit
+      activity: |
+        I will audit the SLP caregiver documentation for Medicare compliance.
+        **Competency/Safety Finding:** [Assessment of caregiver identity/role, SLP task trained, return demonstration/teach-back, accuracy/cueing level, safety comprehension]
+        **Required Documentation Elements:** [Caregiver identity, task trained, teach-back/return demo, cueing level, comprehension, cognitive capacity if applicable, supervision level, carryover plan, red flags/escalation, discharge/skilled-need linkage]
+        **Denial Risk:** [HIGH/MODERATE/LOW with rationale]
+        **Corrective Wording:** [Specific documentation improvements]
+        **Source Grounding:** Grounded in CMS Medicare Benefit Policy Manual Chapter 15, CMS outpatient therapy documentation guidance, ASHA SLP documentation guidance, and Ensign SLP documentation patterns.
+        **Advisory:** Clinical review required. Non-Device CDS only.
+    - kind: EndDialog
+      id: endDialog
+      clearTopicQueue: true
+inputType: {}
+outputType: {}

@@ -1,0 +1,9 @@
+agent,role,bot_id,component_id,schemaname,status
+OT,fallback,73b45e98-af7a-443a-aa12-6d8a05118530,ae395715-cf8c-4ee6-ba0a-7f767d9e2a3c,copilots_header_8c921.topic.Fallback,patched
+OT,clinical_deactivated,73b45e98-af7a-443a-aa12-6d8a05118530,ba8940b8-9dc0-4170-9866-bb7f5fb93fa9,copilots_header_8c921.topic.OTGeneralKnowledgeRequest,deactivated
+PT,fallback,593407f3-539b-490f-84ac-d74e13216c81,959540fc-bce6-4a04-a152-bc955567f849,copilots_header_91c3a.topic.Fallback,patched
+PT,clinical_deactivated,593407f3-539b-490f-84ac-d74e13216c81,dac45f2e-ea96-4813-9a20-332ba0f97392,copilots_header_91c3a.topic.ClinicalInquiry,deactivated
+SLP,fallback,6e437a77-a5dc-4984-90eb-4924eab10006,1cce87b6-3419-46bb-9950-d115d20a9cf5,copilots_header_6271a.topic.Fallback,patched
+SLP,clinical_deactivated,6e437a77-a5dc-4984-90eb-4924eab10006,d4509e45-ea7e-4e53-8f09-e93add0ef8ef,copilots_header_6271a.topic.GeneralSLPClinicalInquiry,deactivated
+TDA,fallback,4d0ed0d3-30f6-f011-8406-000d3a37eba2,19972666-7de9-45f3-98da-58726f7a06ad,cr53f_agent18tApN.topic.Fallback,patched
+TDA,clinical_deactivated,4d0ed0d3-30f6-f011-8406-000d3a37eba2,ac3b0308-da75-f111-ab0f-000d3a37eba2,cr53f_agent18tApN.topic.GeneralComplianceGuidance,deactivated

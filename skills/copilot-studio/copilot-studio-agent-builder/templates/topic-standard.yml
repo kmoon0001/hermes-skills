@@ -1,0 +1,36 @@
+# Topic Template — Standard SASC (SearchAndSummarizeContent)
+# Pattern: OnRecognizedIntent -> SASC -> SendActivity -> EndDialog
+# TO USE: Replace __PLACEHOLDER__ values, generate unique IDs for id_ fields
+kind: AdaptiveDialog
+modelDescription: __MODEL_DESCRIPTION__
+beginDialog:
+  kind: OnRecognizedIntent
+  intent:
+    displayName: __TOPIC_NAME__
+    triggerQueries:
+      - "__TRIGGER_PHRASE_1__"
+      - "__TRIGGER_PHRASE_2__"
+      - "__TRIGGER_PHRASE_3__"
+      - "__TRIGGER_PHRASE_4__"
+      - "__TRIGGER_PHRASE_5__"
+  actions:
+    - kind: SearchAndSummarizeContent
+      id: search_abc123
+      userInput: =System.Activity.Text
+      additionalInstructions: |-
+        - __INSTRUCTION_1__
+        - __INSTRUCTION_2__
+        - __INSTRUCTION_3__
+      allowLatencyMessage: false
+      responseCaptureType: FullResponse
+      fileSearchDataSource:
+        searchFilesMode:
+          kind: SearchAllFiles
+      knowledgeSources:
+        kind: SearchAllKnowledgeSources
+    - kind: SendActivity
+      id: send_abc124
+      activity: =Topic.Answer
+    - kind: EndDialog
+      id: end_abc125
+      clearTopicQueue: true

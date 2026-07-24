@@ -1,0 +1,11 @@
+# Knowledge Source — PublicSiteSearchSource (componenttype 16)
+# POST to /api/data/v9.2/botcomponents
+# Replace: {DisplayName}, {Description}, {SiteUrl}, {SchemaName}
+# CRITICAL: YAML data field MUST use \r\n line endings when POSTing to Dataverse
+kind: KnowledgeSourceConfiguration
+displayName: {DisplayName}
+description: {Description}
+isOfficialDataSource: true
+source:
+  kind: PublicSiteSearchSource
+  site: {SiteUrl}

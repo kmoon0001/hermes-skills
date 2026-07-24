@@ -1,0 +1,112 @@
+{
+  "$schema": "https://schema.freqtrade.io/schema.json",
+  "bot_name": "Freqtrade-DryRun",
+  "initial_state": "stopped",
+  "dry_run": true,
+  "dry_run_wallet": 1000,
+  "trading_mode": "spot",
+  "margin_mode": "",
+  "max_open_trades": 2,
+  "stake_currency": "USD",
+  "stake_amount": 50,
+  "tradable_balance_ratio": 0.99,
+  "fiat_display_currency": "USD",
+  "cancel_open_orders_on_exit": true,
+  "timeframe": "5m",
+  "minimal_roi": {
+    "60": 0.01,
+    "30": 0.02,
+    "0": 0.04
+  },
+  "stoploss": -0.10,
+  "trailing_stop": false,
+  "unfilledtimeout": {
+    "entry": 10,
+    "exit": 10,
+    "exit_timeout_count": 0,
+    "unit": "minutes"
+  },
+  "entry_pricing": {
+    "price_side": "same",
+    "use_order_book": true,
+    "order_book_top": 1,
+    "price_last_balance": 0.0,
+    "check_depth_of_market": {
+      "enabled": false,
+      "bids_to_ask_delta": 1
+    }
+  },
+  "exit_pricing": {
+    "price_side": "same",
+    "use_order_book": true,
+    "order_book_top": 1,
+    "price_last_balance": 0.0
+  },
+  "order_types": {
+    "entry": "limit",
+    "exit": "limit",
+    "emergency_exit": "market",
+    "force_exit": "market",
+    "force_entry": "market",
+    "stoploss": "market",
+    "stoploss_on_exchange": false
+  },
+  "order_time_in_force": {
+    "entry": "GTC",
+    "exit": "GTC"
+  },
+  "exchange": {
+    "name": "REPLACE_WITH_OFFICIALLY_SUPPORTED_EXCHANGE",
+    "key": "",
+    "secret": "",
+    "password": "",
+    "ccxt_config": {},
+    "ccxt_async_config": {},
+    "pair_whitelist": [
+      "REPLACE_BASE/USD"
+    ],
+    "pair_blacklist": []
+  },
+  "pairlists": [
+    {
+      "method": "StaticPairList"
+    },
+    {
+      "method": "PrecisionFilter"
+    },
+    {
+      "method": "PriceFilter",
+      "low_price_ratio": 0.01
+    },
+    {
+      "method": "SpreadFilter",
+      "max_spread_ratio": 0.005
+    }
+  ],
+  "telegram": {
+    "enabled": false,
+    "token": "",
+    "chat_id": ""
+  },
+  "api_server": {
+    "enabled": true,
+    "listen_ip_address": "127.0.0.1",
+    "listen_port": 8080,
+    "verbosity": "error",
+    "enable_openapi": false,
+    "jwt_secret_key": "REPLACE_WITH_RANDOM_LOCAL_SECRET",
+    "CORS_origins": [],
+    "username": "freqtrade",
+    "password": "REPLACE_WITH_LOCAL_PASSWORD",
+    "ws_token": "REPLACE_WITH_RANDOM_WS_TOKEN"
+  },
+  "db_url": "sqlite:///tradesv3.dryrun.sqlite",
+  "force_entry_enable": false,
+  "internals": {
+    "process_throttle_secs": 5,
+    "heartbeat_interval": 60
+  },
+  "strategy": "SampleStrategy",
+  "dataformat_ohlcv": "feather",
+  "dataformat_trades": "feather"
+}

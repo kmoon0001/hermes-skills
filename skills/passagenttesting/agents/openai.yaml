@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pass Agent Testing"
+  short_description: "Systematically improve Copilot Studio agent evaluation scores."
+  default_prompt: "Use passagenttesting to diagnose this Copilot Studio agent's evaluation failures, apply Microsoft Learn-backed fixes, publish, and verify scores."

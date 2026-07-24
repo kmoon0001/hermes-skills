@@ -1,0 +1,43 @@
+# Fallback / Conversational Boosting Template
+# Pattern: OnUnknownIntent -> SASC -> ConditionGroup -> SendActivity -> EndDialog
+# Priority -1 = catch-all for unmatched queries
+# TO USE: Replace __PLACEHOLDER__ values, generate unique IDs for id_ fields
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnUnknownIntent
+  id: main
+  priority: -1
+  actions:
+    - kind: SearchAndSummarizeContent
+      id: search_fb001
+      userInput: =System.Activity.Text
+      additionalInstructions: |-
+        - __INSTRUCTION_1__
+        - __INSTRUCTION_2__
+      allowLatencyMessage: false
+      responseCaptureType: FullResponse
+      fileSearchDataSource:
+        searchFilesMode:
+          kind: SearchAllFiles
+      knowledgeSources:
+        kind: SearchAllKnowledgeSources
+      variable: Topic.Answer
+    - kind: ConditionGroup
+      id: cond_fb002
+      conditions:
+        - condition: =Not(IsBlank(Topic.Answer))
+          actions:
+            - kind: SendActivity
+              id: send_fb003
+              activity: =Topic.Answer
+            - kind: EndDialog
+              id: end_fb004
+              clearTopicQueue: true
+      elseActions:
+        - kind: SendActivity
+          id: send_fb005
+          activity: |-
+            __CAPABILITIES_LIST__
+        - kind: EndDialog
+          id: end_fb006
+          clearTopicQueue: true

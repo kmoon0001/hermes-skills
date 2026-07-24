@@ -1,0 +1,74 @@
+# Portfolio Intelligence Dashboard Template
+
+**Location on Desktop:** `C:\Users\kevin\Desktop\dashboard.html` (fully-working example, 354KB)
+
+This is a reference implementation of an interactive portfolio intelligence dashboard built from CMS-enriched facility data. Open directly in a browser — works from `file://` (data is embedded as JSON in the HTML).
+
+## Key Architecture
+
+```
+dashboard.html (self-contained)
+├── <script> with embedded JSON data (all 336 facilities × 36 fields)
+├── Chart.js 4.4.1 (CDN) — charts: doughnut, bar, scatter
+├── D3.js v7 (CDN) — knowledge graph / facility cluster network
+└── Vanilla JS — 6 interactive tabs, search, sort, filter
+```
+
+## What It Contains
+
+### Tab 1 — Overview
+- KPI cards (total facilities, HP count, avg staffing, avg turnover)
+- Rating distribution doughnut chart
+- HP rate × Staffing rating scatter plot (by state)
+- HP vs AE staffing comparison bar chart
+- Top/bottom 5 states by HP rate
+
+### Tab 2 — Regional Analysis
+- Region cards: West, Midwest, South, Northeast with KPIs
+- State detail table (sortable by HP%, staffing, turnover)
+- City trends (cities with 2+ facilities, ranked by HP%)
+
+### Tab 3 — Correlations
+- Staffing rating distribution
+- Ownership type × HP% comparison
+- Evidence-based findings cards with actionable recommendations
+- National benchmark comparisons (CNA=2.3, RN=0.7, turnover=46.5%)
+
+### Tab 4 — Knowledge Graph
+- D3.js force-directed graph
+- Each cluster = facilities sharing same state ±1★ staffing ±15% turnover ±same ownership
+- Cluster nodes (large) connected to member facility nodes (small)
+- Color-coded: green=HP, amber=AE, red=NF
+- Hover tooltip shows facility details and cluster labels
+- Zoomable/draggable
+
+### Tab 5 — All Facilities
+- Full table with 336 facilities
+- Search by name/city/state
+- Filters: rating type, state
+- Sort: name, rating, staffing, turnover
+- Color-coded badges
+
+### Tab 6 — Action Items
+- Facilities ranked by severity (combined red flags)
+- Flags: 1★ staffing, Special Focus, Abuse icon, 3+ fines, fines >$50K, payment denials
+- Sorted by number of flags descending
+
+## How to Build One
+
+1. **Download + match** facilities to CMS (see main SKILL.md → Fuzzy Name Matching)
+2. **Enrich** each facility with CMS fields (turnover, staffing hours, fines, ownership)
+3. **Compute aggregates** per state, city, region, ownership type
+4. **Run correlations**: HP facilities vs AE facilities across all metrics
+5. **Cluster** facilities by shared patterns (same state ± similar staffing ± similar turnover)
+6. **Serialize** all computed data to JSON
+7. **Embed** JSON into `const DATA = {...};` in the HTML
+8. **Open** in browser — no server needed
+
+## Adaptation Notes
+
+- Replace `D.facilities` loop with your own facility array
+- Update `REGIONS` map if your states differ
+- Adjust `CMS_CNA_AVG`/`CMS_RN_AVG`/`CMS_TURNOVER_AVG` for current year benchmarks
+- Add new metrics by adding to the `detail_fields` array and rendering in the facility table
+- Chart.js and D3.js load from CDN — works offline if you vendor the libs

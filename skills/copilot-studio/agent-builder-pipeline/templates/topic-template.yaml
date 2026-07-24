@@ -1,0 +1,34 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent:
+    displayName: [TOPIC_NAME]
+    triggerQueries:
+      - [PHRASE_1]
+      - [PHRASE_2]
+      - [PHRASE_3]
+      - [PHRASE_4]
+      - [PHRASE_5]
+    description: [30-50 words with domain terms + 3-5 sub-topics listed]
+  actions:
+    - kind: SearchAndSummarizeContent
+      id: search-[kebab-name]
+      latencyMessageSettings:
+        allowLatencyMessage: false
+      variable: Topic.Answer
+      userInput: =System.Activity.Text
+      additionalInstructions: |-
+        [Instruction 1 — from research, specific to THIS topic]
+        [Instruction 2 — domain-specific guidance]
+        [Instruction 3 — what to include in answer]
+        [Instruction 4 — max 4 bullets. Close with: (action/contact/escalation)]
+      applyModelKnowledgeSetting: true
+    - kind: SendActivity
+      id: send-answer
+      activity: "{Topic.Answer}"
+    - kind: EndDialog
+      id: end-topic
+      clearTopicQueue: true
+inputType: {}
+outputType: {}

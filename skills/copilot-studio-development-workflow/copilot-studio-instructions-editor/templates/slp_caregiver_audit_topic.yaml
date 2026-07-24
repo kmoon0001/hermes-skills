@@ -1,0 +1,47 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent:
+    displayName: SLP Caregiver Documentation Compliance Audit
+    triggerQueries:
+      - "caregiver competency"
+      - "caregiver safety"
+      - "caregiver teach back"
+      - "caregiver return demonstration"
+      - "caregiver cognitive capacity"
+      - "caregiver supervision level"
+      - "caregiver carryover plan"
+      - "caregiver red flags"
+      - "caregiver discharge linkage"
+      - "caregiver skilled need"
+  actions:
+    - kind: CreateGenerativeAnswers
+      id: createCaregiverAudit
+      inputs: =System.Activity.Text
+      dataSources: []
+      additionalInstructions: |-
+        You are auditing SLP caregiver documentation for Medicare compliance.
+
+        Return ONE concise mini-audit with these sections:
+        1. Competency/Safety Finding - Assess caregiver identity/role, SLP task trained, return demonstration or teach-back, accuracy/cueing level, caregiver understanding and safety comprehension.
+        2. Required Documentation Elements - Caregiver identity, task trained, teach-back/return demo, cueing level, comprehension, cognitive capacity if applicable, supervision level, carryover plan, red flags/escalation, discharge/skilled-need linkage.
+        3. Denial Risk - HIGH/MODERATE/LOW with brief rationale.
+        4. Corrective Wording - Specific documentation improvements.
+        5. Source Grounding - Use natural source names only. Example: "Grounding: CMS Medicare Benefit Policy Manual Chapter 15, CMS outpatient therapy documentation guidance, ASHA SLP documentation guidance, and Ensign SLP documentation patterns."
+        6. Advisory - "Clinical review required. Non-Device CDS only."
+
+        If the question asks about cognitive capacity, include ability to understand, remember, sequence, and demonstrate multi-step instructions.
+
+        FORBIDDEN output:
+        - [1], [2], cite:1, Citation-1, bracket footnotes
+        - Raw URLs or source metadata lines
+        - Duplicate answer blocks
+        - Internal tool JSON, function names, or debug text
+
+        End every response with: Clinical review required. Non-Device CDS only.
+    - kind: EndDialog
+      id: endDialog
+      clearTopicQueue: true
+inputType: {}
+outputType: {}
