@@ -1,0 +1,6 @@
+# Ignore curator backups and usage tracking (large files, not needed in git)
+.curator_backups/
+.usage.json
+.usage.json.lock
+.bundled_manifest
+.curator_state
