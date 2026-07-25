@@ -6,6 +6,9 @@ category: productivity
 
 # Config Consolidation
 
+## Managed Skills
+- powerautomate-office-scripts
+
 Keep Hermes config lean. Every skill/memory should have ONE clear purpose with no overlap.
 
 ## File Limits
